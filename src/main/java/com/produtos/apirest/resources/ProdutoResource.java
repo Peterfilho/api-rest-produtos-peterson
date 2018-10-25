@@ -17,6 +17,7 @@ import com.produtos.apirest.models.Produto;
 import com.produtos.apirest.repository.ProdutoRepository;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value="/api")
@@ -28,26 +29,31 @@ public class ProdutoResource {
 	ProdutoRepository produtoRepository;
 	
 	@GetMapping("/produtos")
+	@ApiOperation(value="Este método retorna a lista de produtos do banco de dados")
 	public List<Produto> listaProdutos(){
 		return produtoRepository.findAll();
 	}
 	
 	@GetMapping("/produto/{id}")
+	@ApiOperation(value="Este método retorna um único produto do banco de dados")
 	public Produto listaProdutoUnico(@PathVariable(value="id") long id){
 		return produtoRepository.findById(id);
 	}
 	
 	@PostMapping("/produto")
+	@ApiOperation(value="Este método cria um novo produto no banco de dados")
 	public Produto salvaProduto(@RequestBody Produto produto) {
 		return produtoRepository.save(produto);
 	}
 	
 	@DeleteMapping("/produto")
+	@ApiOperation(value="Este método exclui um produto do banco de dados")
 	public void deletaProduto(@RequestBody Produto produto) {
 		produtoRepository.delete(produto);
 	}
 	
 	@PutMapping("/produto")
+	@ApiOperation(value="Este método altera algum produto do banco de dados")
 	public Produto atualizaProduto(@RequestBody Produto produto) {
 		return produtoRepository.save(produto);
 	}
